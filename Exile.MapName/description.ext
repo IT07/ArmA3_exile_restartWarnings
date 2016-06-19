@@ -1,0 +1,6 @@
+#include "scarCODE\restartWarnings\config.cpp"
+
+class RscTitles
+{
+	#include "scarCODE\restartWarnings\hpp\RscDisplayRestartWarnings.hpp"
+};
