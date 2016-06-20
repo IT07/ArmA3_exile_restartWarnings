@@ -4,7 +4,7 @@ _giveWarningsAt = getArray (missionConfigFile >> "CfgRestartWarnings" >> "giveWa
 _mode = getNumber (missionConfigFile >> "CfgRestartWarnings" >> "mode");
 if (_mode isEqualTo 1) then // if dynamic
    {
-      systemChat "restartWarnings: mode is 1";
+      //systemChat "restartWarnings: mode is 1";
       _interval = getNumber (missionConfigFile >> "CfgRestartWarnings" >> "dynamic" >> "interval");
       _maxUptimeSeconds = _interval * 3600;
       _warnsToSkip = [];
@@ -20,7 +20,7 @@ if (_mode isEqualTo 1) then // if dynamic
          _giveWarningsAt deleteAt (_giveWarningsAt find _x);
       } forEach _warnsToSkip;
 
-      systemChat format["_giveWarningsAt: %1", _giveWarningsAt];
+      //systemChat format["_giveWarningsAt: %1", _giveWarningsAt];
 
       while { ((_maxUptimeSeconds - (if isMultiplayer then {serverTime} else {time})) > (_forceLeave * 60)) } do
          {
@@ -41,7 +41,7 @@ if (_mode isEqualTo 1) then // if dynamic
    };
 if (_mode isEqualTo 2) then // if scheduled
    {
-      systemChat "restartWarnings: mode is 2";
+      //systemChat "restartWarnings: mode is 2";
 
       _schedule = getArray (missionConfigFile >> "CfgRestartWarnings" >> "scheduled" >> "schedule");
       private ["_arr"];
@@ -82,9 +82,9 @@ if (_mode isEqualTo 2) then // if scheduled
          _giveWarningsAt deleteAt (_giveWarningsAt find _x);
       } forEach _warnsToSkip;
 
-      systemChat format["Restart schedule: %1", _schedule];
-      systemChat format["Seconds from start to restart: %1", _secondsFromStartToRestart];
-      systemChat format["Warnings left: %1", _giveWarningsAt];
+      //systemChat format["Restart schedule: %1", _schedule];
+      //systemChat format["Seconds from start to restart: %1", _secondsFromStartToRestart];
+      //systemChat format["Warnings left: %1", _giveWarningsAt];
 
       while { ((_secondsFromStartToRestart - (if isMultiplayer then {serverTime} else {time})) > (_forceLeave * 60)) } do
          {
