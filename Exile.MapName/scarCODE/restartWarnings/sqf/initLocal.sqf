@@ -9,7 +9,7 @@ if hasInterface then
    {
       _doStuff =
       {
-         player addAction ["Do restart warning...",{(["RscDisplayRestartWarnings"] call BIS_fnc_rscLayer) cutRsc["RscDisplayRestartWarnings", "PLAIN", 0, true]},"",-1,false,true,"alive player"];
+         if (not isMultiplayer) then { addAction ["Do restart warning...",{(["RscDisplayRestartWarnings"] call BIS_fnc_rscLayer) cutRsc["RscDisplayRestartWarnings", "PLAIN", 0, true]},"",-1,false,true,"alive player"] };
          [] ExecVM "scarCODE\restartWarnings\sqf\timeLoop.sqf";
          systemChat "[scarCODE] Started restartWarnings...";
       };
@@ -28,5 +28,5 @@ if hasInterface then
    {
       waitUntil { if (serverTime > 0) then {true} else {uiSleep 1; false} };
       missionStartServer = missionStart;
-      publicVariable "missionStartServer"; 
+      publicVariable "missionStartServer";
    };
