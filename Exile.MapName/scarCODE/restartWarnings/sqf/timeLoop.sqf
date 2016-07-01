@@ -22,13 +22,15 @@ if (_mode isEqualTo 1) then // if dynamic
 
       //systemChat format["_giveWarningsAt: %1", _giveWarningsAt];
 
-      while { ((_maxUptimeSeconds - (if isMultiplayer then {serverTime} else {time})) > (_forceLeave * 60)) } do
+      while {true} do
          {
+            scopeName "while";
             _warningTime = _giveWarningsAt select 0;
             waitUntil { if ((_maxUptimeSeconds - (if isMultiplayer then {serverTime} else {time})) <= (_warningTime * 60)) then {true} else {uiSleep 1; false} };
             uiNamespace setVariable ["restartWarningsTimeLeft", _warningTime];
             (["RscDisplayRestartWarnings"] call BIS_fnc_rscLayer) cutRsc["RscDisplayRestartWarnings", "PLAIN", 0, true];
             _giveWarningsAt deleteAt 0;
+            if (((count _giveWarningsAt) isEqualTo 0) OR (_warningTime <= _forceLeave)) then { breakOut "while" };
          };
 
       if (_forceLeave > 0) then
@@ -86,14 +88,17 @@ if (_mode isEqualTo 2) then // if scheduled
       //systemChat format["Seconds from start to restart: %1", _secondsFromStartToRestart];
       //systemChat format["Warnings left: %1", _giveWarningsAt];
 
-      while { ((_secondsFromStartToRestart - (if isMultiplayer then {serverTime} else {time})) > (_forceLeave * 60)) } do
+      while {true} do
          {
+            scopeName "while";
             _warningTime = _giveWarningsAt select 0;
             waitUntil { if ((_secondsFromStartToRestart - (if isMultiplayer then {serverTime} else {time})) <= (_warningTime * 60)) then {true} else {uiSleep 1; false} };
             uiNamespace setVariable ["restartWarningsTimeLeft", _warningTime];
             (["RscDisplayRestartWarnings"] call BIS_fnc_rscLayer) cutRsc["RscDisplayRestartWarnings", "PLAIN", 0, true];
             _giveWarningsAt deleteAt 0;
+            if (((count _giveWarningsAt) isEqualTo 0) OR (_warningTime <= _forceLeave)) then { breakOut "while" };
          };
+
       if (_forceLeave > 0) then
          {
             systemChat "YOU WILL BE KICKED IN 30 SECONDS!";
