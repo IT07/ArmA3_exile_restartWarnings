@@ -1,5 +1,9 @@
 #####1st release: June 19th, 2016
 
+####Update July 2nd, 2016
+**[FIXED]** script error <br />
+<br />
+
 ####Update June 21st, 2016
 **[FIXED]** error missing ; <br />
 <br />
